@@ -9,7 +9,8 @@ variability; 2) the effects within a source of variability are assumed to come f
 estimate of effects within a source of variability is influenced by the sample size of the source (partial pooling effects).
 
 # Experimental context
-
+Mixed plantation experiment between Eucalyptus urograndis and Acacia Mangium (N-fixing tree). Measurament of nitrous oxide collected from 
+chamber over eleveen months for times a day. The stands are: 1) A100 (pure plantion of Acacia Mangium), 2) E100 (Pure plantion of Eucalyptus urograndis), and 3) A50E50 ( mixed plantion between Acacia and Eucalyptus).
 
 # Building the model         
          cat("model{
