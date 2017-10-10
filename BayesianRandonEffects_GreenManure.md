@@ -132,21 +132,19 @@ cat("model{
     # Green Manure - Tillage effect size
     for (i in 1:n.green){for(j in 1:n.til){ g.gt[i,j] <- theta.gt[i,j]-mean(theta.gt[,])
         
-   }
- }
-     # End of the model
+     }
+    }      
     
-    }",file="VARPART_green_manure_model.txt")
-    
+    }",file="VARPART_green_manure_model.txt") 
     
     
-#####################################
-# Bundle data
-win.data <- list(y=as.numeric(y), n.row=n.row, n.col=n.col,n.plots=n.plots, n.treat=n.treat,n.ct=n.ct, ROW=ROW, COL=COL, TREAT=TREAT, CT=CT, PLOT=PLOT)
+
+     # Bundle data
+     win.data <- list(y=as.numeric(y), n.row=n.row, n.col=n.col,n.plots=n.plots, n.treat=n.treat,n.ct=n.ct, ROW=ROW, COL=COL, TREAT=TREAT, CT=CT, PLOT=PLOT)
 
 
-# Inits function
-inits <- function(){ list( alpha = rnorm(1),
+     # Inits function
+    inits <- function(){ list( alpha = rnorm(1),
                            sigma.row= rlnorm(1),
                            sigma.col = rlnorm(1),
                            sigma.green = rlnorm(1),
@@ -156,32 +154,32 @@ inits <- function(){ list( alpha = rnorm(1),
                            sigma.rt = rlnorm(1),
                            sigma.ct = rlnorm(1),
                            sigma.pt = rlnorm(1))}
-# Parameters to estimate
-params <- c("g.gree","g.til","g.gt","s.theta.green",
-"s.theta.col","s.theta.row","s.theta.plots",
-"s.theta.til","s.theta.gt","s.theta.rt",
-"s.theta.ct","s.theta.pt","theta.green",
-"theta.row","theta.col","theta.plots",
-"theta.til","theta.gt","theta.rt",
-"theta.ct","theta.pt")
+    # Parameters to estimate
+    params <- c("g.gree","g.til","g.gt","s.theta.green",
+                "s.theta.col","s.theta.row","s.theta.plots",
+                "s.theta.til","s.theta.gt","s.theta.rt",
+                "s.theta.ct","s.theta.pt","theta.green",
+                "theta.row","theta.col","theta.plots",
+                "theta.til","theta.gt","theta.rt",
+                "theta.ct","theta.pt")
 
-params
-# MCMC settings
-ni <- 600000
-nb <- 550000
-nt <- 30
-nc <- 3
+    
+    # MCMC settings
+    ni <- 600000
+    nb <- 550000
+    nt <- 30
+    nc <- 3
 
-## Run the MCMC simulation
-data.model <- jags.model(file="VARPART_green_manure_model.txt", data=win.data ,inits = inits,
+    # Run the MCMC simulation
+    data.model <- jags.model(file="VARPART_green_manure_model.txt", data=win.data ,inits = inits,
                          n.chains=nc, n.adapt=nb)
 
-## Compile MCMC samples, monitor all parameters,
-## hyperparameters, and replicated values
-data.samples <- coda.samples(data.model,variable.names=params, n.iter=ni, thin=nt, n.adapt=nb)  
+    # Compile MCMC samples, monitor all parameters,
+    # hyperparameters, and replicated values
+    data.samples <- coda.samples(data.model,variable.names=params, n.iter=ni, thin=nt, n.adapt=nb)  
 
-mcmcplot(data.samples)
-gelman.diag(data.samples,multivariate=F)
+    mcmcplot(data.samples)
+    gelman.diag(data.samples,multivariate=F)
 
 
 
