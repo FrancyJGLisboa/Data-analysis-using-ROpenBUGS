@@ -7,20 +7,21 @@ The code is about  the use of a varying-intercept model (random-effect model) to
  
 # Experiment
 In the Latin-Square split-plot the green manure crops are organized in a way that each crop occurs only one time in a row and only one time in a column. Additionaly, each crop plot was subdivided into two subplots each representing one type of tillage (conventional, no-tillage). Therefore, the abundance of colembolas was taken from a total of 50 observations (5 rows x 5 columns x 2 tillage systems).
-  
-  
+    
 # ROpenBUGS
 To run this analysis I opted by the R package ROpenBUGS which allows to run Bayesian models  in R using the open source version of the WinBUGS program, the OpenBUGS. The model specification in ROpenBUGS was:
 
-# General parameters
-n.row = 5
-n.col = 5
-n.plots = 50
-n.green = 5
-n.til = 2
-
 # Building the model
-cat("model{
+
+    # General parameters
+    n.row = 5
+    n.col = 5
+    n.plots = 50
+    n.green = 5
+    n.til = 2
+    
+    
+    cat("model{
 
     # Data model Likelihood
         
@@ -183,4 +184,4 @@ cat("model{
 
 
 
-## End of the code
+    ## End of the code
